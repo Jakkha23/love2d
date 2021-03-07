@@ -1,6 +1,6 @@
---Global Variables
-X = 10
-Y = 40
+--Global VariablesP
+PLAYER_X = 10
+PLAYER_Y = 40
 WEAPON = 0
 AMMUNITION = 0
 FULL_AMMUNITION = 0
@@ -10,8 +10,8 @@ function love.keypressed(key, scancode, isrepeat)
     if key == "escape" then
        love.event.quit()
     elseif key == "tab" then
-        X = 10
-        Y = 40
+        PLAYER_X = 10
+        PLAYER_Y = 40
         WEAPON = 0
         print("game was restarted")
     elseif key == "0" then
@@ -57,45 +57,55 @@ end
  --update. when button is being held down move with a certain speed.
  function love.update(dt) 
      if love.keyboard.isDown("s") then
-         Y = Y + 2
+        if PLAYER_Y<(love.graphics.getHeight()) then
+            PLAYER_Y = PLAYER_Y + 2
+            print(PLAYER_Y)
+        end
      end
      if love.keyboard.isDown("a") then       
-            X = X - 2
+        if PLAYER_X>0 then
+            PLAYER_X = PLAYER_X - 2
+        end
      end
      if love.keyboard.isDown("d") then
-            X = X + 2
+        if PLAYER_X<(love.graphics.getWidth())-15 then
+            PLAYER_X = PLAYER_X + 2
+            print(PLAYER_X)
+        end
      end
      if love.keyboard.isDown("w") then
-            Y = Y - 2
+        if PLAYER_Y>30 then
+            PLAYER_Y = PLAYER_Y - 2
+        end 
     end
 end
 
---draws character and weapons.
+--draws character and weapons at play x and y coordinates.
 love.draw = function ()
 if WEAPON == 0 then -- draws character and weapon 0
-    love.graphics.line(X, Y, X+5, Y-10)
-    love.graphics.line(X+10, Y, X+5, Y-10)
-    love.graphics.line(X+5, Y-10, X+5, Y-20)
-    love.graphics.line(X+5,Y-20, X, Y-15)
-    love.graphics.line(X+5,Y-20, X+10, Y-15)
-    love.graphics.circle("fill",X+5,Y-25, 5)
+    love.graphics.line(PLAYER_X, PLAYER_Y, PLAYER_X+5, PLAYER_Y-10)
+    love.graphics.line(PLAYER_X+10, PLAYER_Y, PLAYER_X+5, PLAYER_Y-10)
+    love.graphics.line(PLAYER_X+5, PLAYER_Y-10, PLAYER_X+5, PLAYER_Y-20)
+    love.graphics.line(PLAYER_X+5,PLAYER_Y-20, PLAYER_X, PLAYER_Y-15)
+    love.graphics.line(PLAYER_X+5,PLAYER_Y-20, PLAYER_X+10, PLAYER_Y-15)
+    love.graphics.circle("fill",PLAYER_X+5,PLAYER_Y-25, 5)
 elseif WEAPON == 1 then -- draws character and weapon 1
-    love.graphics.line(X, Y, X+5, Y-10) -- left leg
-    love.graphics.line(X+10, Y, X+5, Y-10) --right leg
-    love.graphics.line(X+5, Y-10, X+5, Y-20) --torso
-    love.graphics.line(X+5,Y-20, X, Y-15) --left arm
-    love.graphics.line(X+5,Y-20, X+10, Y-15) --right arm
-    love.graphics.circle("fill",X+5,Y-25, 5) --head
+    love.graphics.line(PLAYER_X, PLAYER_Y, PLAYER_X+5, PLAYER_Y-10)
+    love.graphics.line(PLAYER_X+10, PLAYER_Y, PLAYER_X+5, PLAYER_Y-10)
+    love.graphics.line(PLAYER_X+5, PLAYER_Y-10, PLAYER_X+5, PLAYER_Y-20)
+    love.graphics.line(PLAYER_X+5,PLAYER_Y-20, PLAYER_X, PLAYER_Y-15)
+    love.graphics.line(PLAYER_X+5,PLAYER_Y-20, PLAYER_X+10, PLAYER_Y-15)
+    love.graphics.circle("fill",PLAYER_X+5,PLAYER_Y-25, 5)
     --draws gun
-    love.graphics.line(X+10, Y-20, X+20, Y-20) --gun
-    love.graphics.line(X+10, Y-15, X+10, Y-20) --gun
+    love.graphics.line(PLAYER_X+10, PLAYER_Y-20, PLAYER_X+20, PLAYER_Y-20) --gun
+    love.graphics.line(PLAYER_X+10, PLAYER_Y-15, PLAYER_X+10, PLAYER_Y-20) --gun
 elseif WEAPON == 2 then -- draws character and weapon 2
-    love.graphics.line(X, Y, X+5, Y-10) -- left leg
-    love.graphics.line(X+10, Y, X+5, Y-10) --right leg
-    love.graphics.line(X+5, Y-10, X+5, Y-20) --torso
-    love.graphics.line(X+5,Y-20, X, Y-15) --left arm
-    love.graphics.line(X+5,Y-20, X+10, Y-15) --right arm
-    love.graphics.circle("fill",X+5,Y-25, 5) --head
+    love.graphics.line(PLAYER_X, PLAYER_Y, PLAYER_X+5, PLAYER_Y-10)
+    love.graphics.line(PLAYER_X+10, PLAYER_Y, PLAYER_X+5, PLAYER_Y-10)
+    love.graphics.line(PLAYER_X+5, PLAYER_Y-10, PLAYER_X+5, PLAYER_Y-20)
+    love.graphics.line(PLAYER_X+5,PLAYER_Y-20, PLAYER_X, PLAYER_Y-15)
+    love.graphics.line(PLAYER_X+5,PLAYER_Y-20, PLAYER_X+10, PLAYER_Y-15)
+    love.graphics.circle("fill",PLAYER_X+5,PLAYER_Y-25, 5)
     --draws gun
 end
 end
